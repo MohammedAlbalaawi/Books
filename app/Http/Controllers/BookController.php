@@ -17,7 +17,9 @@ class BookController extends Controller
      */
     public function index()
     {
-        return view('books.index');
+        $books = Book::all();
+        $flashMsg = session('success');
+        return view('books.index',compact('books','flashMsg'));
     }
 
     /**
