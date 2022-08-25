@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreBookRequest;
 use App\Models\Author;
 use App\Models\Book;
 use App\Models\Department;
@@ -45,7 +46,7 @@ class BookController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreBookRequest $request)
     {
 
         $author = Author::all()->where('name','=',$request->authorName)->first();

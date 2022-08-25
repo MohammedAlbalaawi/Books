@@ -14,18 +14,25 @@
         @csrf
         <div class="col-6 mx-auto">
             <div class="mb-3">
-                <input type="text" class="form-control" name="title" placeholder="Enter title">
+                <input type="text"
+                       class="form-control @error('title') is-invalid @enderror"
+                       name="title"
+                       value="{{old('title')}}"
+                       placeholder="Enter title">
+                @error('title')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
             <div class="mb-3 row">
                 <div class="col-auto">
                     <label class="col-form-label">Author</label>
                 </div>
                 <div class="col">
-                <select class="form-control" name="authorName">
-                    @foreach($authors as $author)
-                    <option >{{$author->name}}</option>
-                    @endforeach
-                </select>
+                    <select class="form-control" name="authorName">
+                        @foreach($authors as $author)
+                            <option>{{$author->name}}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
             <div class="mb-3">
@@ -33,27 +40,40 @@
             </div>
             <div class="mb-3">
                 <select class="form-control" name="language">
-                    <option >Arabic</option>
-                    <option >English</option>
+                    <option>Arabic</option>
+                    <option>English</option>
                 </select>
             </div>
             <div class="mb-3 row">
                 <div class="col-auto">
-                <label class="col-form-label">Deparment</label>
+                    <label class="col-form-label">Deparment</label>
                 </div>
                 <div class="col">
-                <select class="form-control" name="departmentName">
-                    @foreach($departments as $department)
-                        <option>{{$department->name}}</option>
-                    @endforeach
-                </select>
+                    <select class="form-control" name="departmentName">
+                        @foreach($departments as $department)
+                            <option>{{$department->name}}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
             <div class="mb-3">
-                <input type="text" class="form-control" name="year" placeholder="Release Year">
+                <input type="text"
+                       class="form-control @error('year') is-invalid @enderror"
+                       name="year"
+                       value="{{old('year')}}"
+                       placeholder="Release Year">
+                @error('title')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
             <div class="mb-3">
-                <input type="file" class="form-control" name="bookImage" >
+                <input type="file"
+                       class="form-control @error('title') is-invalid @enderror"
+                       name="bookImage"
+                       value="{{old('bookImage')}}">
+                @error('title')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
             <div class="mb-3">
                 <Button type="submit" class="form-control btn btn-primary" name="submit">SUBMIT</Button>

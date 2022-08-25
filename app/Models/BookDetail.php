@@ -21,7 +21,7 @@ class BookDetail extends Model
     public function book(){
         return $this->belongsTo(Book::class);
     }
-    public function deparment(){
+    public function department(){
         return $this->belongsTo(Department::class);
     }
 }

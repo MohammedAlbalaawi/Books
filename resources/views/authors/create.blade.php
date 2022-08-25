@@ -10,6 +10,18 @@
 @endsection
 
 @section('content')
+    <!-- Show Error Messages -->
+    <div class="col-6 mx-auto">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+    </div>
     <form action="{{route('authors.store')}}" method="post">
         @csrf
         <div class="col-6 mx-auto">

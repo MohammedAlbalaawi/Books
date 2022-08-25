@@ -37,7 +37,7 @@ use App\Models\Department;
             <tr style="height: auto;vertical-align: middle;">
                 <td>{{ $book->title }}</td>
                 <td>{{$book->author->name}}</td>
-                <td>{{Department::all()->where('id','=',$book->bookdetail->department_id)->first()->name}}</td>
+                <td>{{$book->bookdetail->department->name ?? null}}</td>
                 <td>{{$book->bookdetail->language}}</td>
                 <td>{{$book->bookdetail->year}}</td>
                 <td><img src="{{asset('Images/'.$book->bookdetail->image)}}" alt="Book Picture" style="width: 50px;"</td>
