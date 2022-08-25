@@ -104,9 +104,9 @@ class BookController extends Controller
      * @param \App\Models\Book $book
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreBookEdittRequest $request, $id)
+    public function update(StoreBookEdittRequest $request, Book $book)
     {
-        $book = Book::findorfail($id);
+
         $author = Author::where('name', '=', $request->authorName)->first();
         $department = Department::where('name', '=', $request->departmentName)->first();
 
@@ -143,8 +143,12 @@ class BookController extends Controller
      * @param \App\Models\Book $book
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Book $book)
     {
-        Book::destroy($id);
+        $book->delete();
+
+        return redirect()
+            ->route('books.index')
+            ->with('success', 'Book Deleted SUCCESSFULLY');
     }
 }
