@@ -53,6 +53,10 @@ class BookController extends Controller
         $author = Author::all()->where('name', '=', $request->authorName)->first();
         $department = Department::all()->where('name', '=', $request->departmentName)->first();
 
+        // Get Image Path
+        $imageName = $request->file('bookImage')->getClientOriginalName();
+        $path = $request->file('bookImage')->storeAs('books', $imageName, 'publicImages');
+
 
         $book = Book::create([
             'title' => $request->title,
