@@ -62,16 +62,15 @@
                        name="year"
                        value="{{old('year')}}"
                        placeholder="Release Year">
-                @error('title')
+                @error('year')
                 <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
             <div class="mb-3">
                 <input type="file"
-                       class="form-control @error('title') is-invalid @enderror"
-                       name="bookImage"
-                       value="{{old('bookImage')}}">
-                @error('title')
+                       class="form-control @error('bookImage') is-invalid @enderror"
+                       name="bookImage">
+                @error('bookImage')
                 <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>

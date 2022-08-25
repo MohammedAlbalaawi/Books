@@ -20,7 +20,7 @@ class BookController extends Controller
     {
         $books = Book::all();
         $flashMsg = session('success');
-        return view('books.index',compact('books','flashMsg'));
+        return view('books.index', compact('books', 'flashMsg'));
     }
 
     /**
@@ -43,18 +43,15 @@ class BookController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreBookRequest $request)
     {
 
-        $author = Author::all()->where('name','=',$request->authorName)->first();
-        $department = Department::all()->where('name','=',$request->departmentName)->first();
+        $author = Author::all()->where('name', '=', $request->authorName)->first();
+        $department = Department::all()->where('name', '=', $request->departmentName)->first();
 
-        // Get Image Path
-        $imageName = $request->file('bookImage')->getClientOriginalName();
-        $path = $request->file('bookImage')->storeAs('books',$imageName,'publicImages');
 
         $book = Book::create([
             'title' => $request->title,
@@ -70,47 +67,79 @@ class BookController extends Controller
 
         return redirect()
             ->route('books.index')
-            ->with('success','Book Added SUCCESSFULLY');
+            ->with('success', 'Book Added SUCCESSFULLY');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Book  $book
+     * @param \App\Models\Book $book
      * @return \Illuminate\Http\Response
      */
-    public function show(Book $book)
+    public function show($id)
     {
-        //
+        $book = Book::findorfail($id);
+        return view('books.show', compact('book'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Book  $book
+     * @param \App\Models\Book $book
      * @return \Illuminate\Http\Response
      */
-    public function edit(Book $book)
+    public function edit($id)
     {
-        //
+        $book = Book::findorfail($id);
+        $authors = Author::all();
+        $departments = Department::all();
+        return view('books.edit', compact('book', 'authors', 'departments'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Book  $book
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Book $book
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Book $book)
+    public function update(Request $request, $id)
     {
-        //
+        $book = Book::findorfail($id);
+        $author = Author::where('name', '=', $request->authorName)->first();
+        $department = Department::where('name', '=', $request->departmentName)->first();
+
+
+        $book->update([
+            'title' => $request->title,
+            'author_id' => $author->id
+        ]);
+
+        $book->bookdetail()->update([
+            'department_id' => $department->id,
+            'language' => $request->language,
+            'year' => $request->year
+        ]);
+
+        if ($request->hasfile('bookImage')) {
+            // Get Image Path
+            $imageName = $request->file('bookImage')->getClientOriginalName();
+            $path = $request->file('bookImage')->storeAs('books', $imageName, 'publicImages');
+
+            $book->bookdetail()->update([
+                'image' => $path
+            ]);
+        }
+
+        return redirect()
+            ->route('books.index')
+            ->with('success', 'Book Edited SUCCESSFULLY');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Book  $book
+     * @param \App\Models\Book $book
      * @return \Illuminate\Http\Response
      */
     public function destroy(Book $book)
