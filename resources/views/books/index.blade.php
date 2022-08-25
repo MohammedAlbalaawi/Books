@@ -49,7 +49,7 @@ use App\Models\Department;
                 <td>
                     <a href="{{route('books.show',$book->id)}}" class="btn btn-success">Show</a>
                     <a href="{{route('books.edit',$book->id)}}" class="btn btn-primary">Edit</a>
-                    <form action="" method="post" style="display: inline;">
+                    <form action="{{route('books.destroy',$book->id)}}" method="post" style="display: inline;">
                         @csrf
                         @method('delete')
 

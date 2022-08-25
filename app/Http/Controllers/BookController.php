@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreBookEdittRequest;
 use App\Http\Requests\StoreBookRequest;
 use App\Models\Author;
 use App\Models\Book;
@@ -103,7 +104,7 @@ class BookController extends Controller
      * @param \App\Models\Book $book
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreBookEdittRequest $request, $id)
     {
         $book = Book::findorfail($id);
         $author = Author::where('name', '=', $request->authorName)->first();
@@ -142,8 +143,8 @@ class BookController extends Controller
      * @param \App\Models\Book $book
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Book $book)
+    public function destroy($id)
     {
-        //
+        Book::destroy($id);
     }
 }
