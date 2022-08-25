@@ -52,9 +52,10 @@ class AuthorController extends Controller
      * @param  \App\Models\Author  $author
      * @return \Illuminate\Http\Response
      */
-    public function show(Author $author)
+    public function show($id)
     {
-        //
+        $author = Author::findorfail($id);
+        return view('authors.show',compact('author'));
     }
 
     /**
@@ -63,9 +64,10 @@ class AuthorController extends Controller
      * @param  \App\Models\Author  $author
      * @return \Illuminate\Http\Response
      */
-    public function edit(Author $author)
+    public function edit($id)
     {
-        //
+        $author = Author::findorfail($id);
+        return view('authors.edit',compact('author'));
     }
 
     /**
@@ -75,9 +77,14 @@ class AuthorController extends Controller
      * @param  \App\Models\Author  $author
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Author $author)
+    public function update(Request $request, $id)
     {
-        //
+        $author = Author::findorfail($id);
+        $author->update($request->all());
+
+        return redirect()
+            ->route('authors.index')
+            ->with('success','Author Edited SUCCESSFULLY');
     }
 
     /**
@@ -86,8 +93,12 @@ class AuthorController extends Controller
      * @param  \App\Models\Author  $author
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Author $author)
+    public function destroy($id)
     {
-        //
+        Author::destroy($id);
+
+        return redirect()
+            ->route('authors.index')
+            ->with('success','Author and His Books Deleted SUCCESSFULLY');
     }
 }

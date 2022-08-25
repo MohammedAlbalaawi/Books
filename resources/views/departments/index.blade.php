@@ -3,11 +3,11 @@
 @section('nav-button')
     <div class="container d-flex justify-content-start ">
         <a class="btn btn-light mx-2" href="/">Back to Main</a>
-        <a class="btn btn-light" href="{{route('authors.create')}}">Add New Author</a>
+        <a class="btn btn-light" href="{{route('departments.create')}}">Add New Department</a>
     </div>
 @endsection
 @section('page-title')
-    <h3>Authors</h3>
+    <h3>Departments</h3>
 @endsection
 
 @section('content')
@@ -20,21 +20,18 @@
         <thead class="table-dark ">
         <tr>
             <th scope="col">Name</th>
-            <th scope="col">Country</th>
-            <th scope="col">Email</th>
             <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
-        @foreach ($authors as $author)
+        @foreach ($departments as $department)
             <tr style="height: auto;vertical-align: middle;">
-                <td>{{$author->name}}</td>
-                <td>{{$author->country}}</td>
-                <td>{{$author->email}}</td>
+                <td>{{$department->name}}</td>
+
                 <td>
-                    <a href="{{route('authors.show',$author->id)}}" class="btn btn-success">Show</a>
-                    <a href="{{route('authors.edit',$author->id)}}" class="btn btn-primary">Edit</a>
-                    <form action="{{route('authors.destroy',$author->id)}}" method="post" style="display: inline;">
+                    <a href="" class="btn btn-success">Show</a>
+                    <a href="" class="btn btn-primary">Edit</a>
+                    <form action="{{route('departments.destroy',$department->id)}}" method="post" style="display: inline;">
                         @csrf
                         @method('delete')
 

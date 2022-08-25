@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('book_details', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('book_id')->constrained();
-            $table->foreignId('department_id')->constrained();
+            $table->foreignId('book_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('department_id')->constrained()->cascadeOnDelete();
             $table->string('language');
             $table->string('year');
             $table->string('image');

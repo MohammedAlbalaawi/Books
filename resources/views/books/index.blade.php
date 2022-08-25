@@ -1,7 +1,9 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Department;
+
 ?>
 @extends('layouts.main')
 
@@ -16,10 +18,11 @@ use App\Models\Department;
 @endsection
 
 @section('content')
-    @if($flashMsg)
-        <div class="alert alert-success" role="alert">{{$flashMsg}} </div>
-    @endif
-
+    <div class="col-6 mx-auto">
+        @if($flashMsg)
+            <div class="alert alert-success" role="alert">{{$flashMsg}} </div>
+        @endif
+    </div>
     <table class="table  table-hover  mx-auto text-center">
         <thead class="table-dark ">
         <tr>
@@ -40,7 +43,8 @@ use App\Models\Department;
                 <td>{{$book->bookdetail->department->name ?? null}}</td>
                 <td>{{$book->bookdetail->language}}</td>
                 <td>{{$book->bookdetail->year}}</td>
-                <td><img src="{{asset('Images/'.$book->bookdetail->image)}}" alt="Book Picture" style="width: 50px;"</td>
+                <td><img src="{{asset('Images/'.$book->bookdetail->image)}}" alt="Book Picture" style="width: 50px;"
+                </td>
                 <td>
                     <a href="" class="btn btn-success">Show</a>
                     <a href="" class="btn btn-primary">Edit</a>
