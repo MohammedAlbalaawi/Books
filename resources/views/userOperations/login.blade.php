@@ -13,36 +13,45 @@
 </head>
 <body>
     <div class="wrapper fadeInDown">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div id="formContent">
-  
+
           <!-- Login Form -->
           <form method="POST" action="{{ route('userOperations.check') }}">
             @csrf
-            
-            <input 
+
+            <input
             class ="mt-5"
-            type="text" 
-            class="fadeIn second" 
-            name="user_email" 
+            type="text"
+            class="fadeIn second"
+            name="email"
             placeholder="Email">
 
-            <input 
-            class="fadeIn third" 
-            type="text" 
-            name="user_pass" 
+            <input
+            class="fadeIn third"
+            type="text"
+            name="password"
             placeholder="Password">
 
-            <input 
-            type="submit" 
-            class="fadeIn fourth" 
+            <input
+            type="submit"
+            class="fadeIn fourth"
             value="Log In">
           </form>
-      
+
           <!-- Remind Passowrd -->
           {{-- <div id="formFooter">
             <a  href="#">Forgot Password?</a>
           </div> --}}
-      
+
         </div>
       </div>
 </body>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class LoginopController extends Controller
@@ -16,7 +17,9 @@ class LoginopController extends Controller
      */
     public function index()
     {
-
+        if(Auth::check()){
+            Auth::logout();
+        }
         return view('userOperations.login');
     }
 
@@ -27,7 +30,6 @@ class LoginopController extends Controller
      */
     public function create()
     {
-
     }
 
     /**
@@ -38,8 +40,6 @@ class LoginopController extends Controller
      */
     public function store(Request $request)
     {
-
-
     }
 
     /**
@@ -50,7 +50,6 @@ class LoginopController extends Controller
      */
     public function show()
     {
-
     }
 
     /**
@@ -90,15 +89,32 @@ class LoginopController extends Controller
     public function check(Request $request)
     {
 
-        $user = User::where('email','=',$request->user_email)->first();
+        $validated = $request->validate([
+            'user_email' => 'required|email',
+            'user_pass' => 'required|alphaNum|min:3',
+        ]);
 
-        if ($user) {
-            $hashedPassword = $user->password;
-            if (Hash::check($request->user_pass , $hashedPassword)) {
-                return 'ok';
-            }
-        }else{
-            return redirect()->route('userOperations.index');
+        // $user = User::where('email','=',$request->user_email)->first();
+
+        // if ($user) {
+        //     $hashedPassword = $user->password;
+        //     if (Hash::check($request->user_pass , $hashedPassword)) {
+        //         return 'ok';
+        //     }
+        // }else{
+        //     return redirect()->route('userOperations.index');
+        // }
+
+
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            return redirect('/');
+        } else {
+            return view('userOperations.login');
         }
+    }
+
+    public function logout(){
+        Auth::logout();
+        return redirect()->route('userOperations.index');
     }
 }
