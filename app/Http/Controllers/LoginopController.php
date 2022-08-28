@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BookDetail;
+
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
-class BookDetailController extends Controller
+class LoginopController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +16,8 @@ class BookDetailController extends Controller
      */
     public function index()
     {
-        //
+
+        return view('userOperations.login');
     }
 
     /**
@@ -25,38 +27,39 @@ class BookDetailController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\BookDetail  $bookDetail
+     * @param \App\Models\Department $department
      * @return \Illuminate\Http\Response
      */
-    public function show(BookDetail $bookDetail)
+    public function show()
     {
-        //
+
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\BookDetail  $bookDetail
+     * @param \App\Models\Department $department
      * @return \Illuminate\Http\Response
      */
-    public function edit(BookDetail $bookDetail)
+    public function edit()
     {
         //
     }
@@ -64,11 +67,11 @@ class BookDetailController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\BookDetail  $bookDetail
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Department $department
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, BookDetail $bookDetail)
+    public function update(Request $request)
     {
         //
     }
@@ -76,11 +79,26 @@ class BookDetailController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\BookDetail  $bookDetail
+     * @param \App\Models\Department $department
      * @return \Illuminate\Http\Response
      */
-    public function destroy(BookDetail $bookDetail)
+    public function destroy()
     {
         //
+    }
+
+    public function check(Request $request)
+    {
+
+        $user = User::where('email','=',$request->user_email)->first();
+
+        if ($user) {
+            $hashedPassword = $user->password;
+            if (Hash::check($request->user_pass , $hashedPassword)) {
+                return 'ok';
+            }
+        }else{
+            return redirect()->route('userOperations.index');
+        }
     }
 }

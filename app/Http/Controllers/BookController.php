@@ -12,6 +12,8 @@ use Nette\Utils\Image;
 
 class BookController extends Controller
 {
+
+
     /**
      * Display a listing of the resource.
      *
@@ -34,10 +36,12 @@ class BookController extends Controller
         $authors = Author::all();
         $departments = Department::all();
 
-        return view('books.create',
+        return view(
+            'books.create',
             compact(
                 'authors',
-                'departments')
+                'departments'
+            )
         );
     }
 
