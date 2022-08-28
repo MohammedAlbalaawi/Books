@@ -31,8 +31,10 @@
                 <td>{{$author->name}}</td>
                 <td>{{$author->country}}</td>
                 <td>{{$author->email}}</td>
+
                 <td>
                     <a href="{{route('authors.show',$author->id)}}" class="btn btn-success">Show</a>
+                    @if(Auth::user())
                     <a href="{{route('authors.edit',$author->id)}}" class="btn btn-primary">Edit</a>
                     <form action="{{route('authors.destroy',$author->id)}}" method="post" style="display: inline;">
                         @csrf
@@ -41,8 +43,9 @@
                         <button class="btn btn-danger"
                                 type="submit" style="border: none;outline:none;">Delete</button>
                     </form>
-
+                    @endif
                 </td>
+
             </tr>
         @endforeach
         </tbody>

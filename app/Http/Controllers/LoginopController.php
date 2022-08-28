@@ -90,8 +90,8 @@ class LoginopController extends Controller
     {
 
         $validated = $request->validate([
-            'user_email' => 'required|email',
-            'user_pass' => 'required|alphaNum|min:3',
+            'email' => 'required|email',
+            'password' => 'required|alphaNum|min:3',
         ]);
 
         // $user = User::where('email','=',$request->user_email)->first();

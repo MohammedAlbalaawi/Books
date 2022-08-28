@@ -1,10 +1,4 @@
-<?php
 
-namespace App\Http\Controllers;
-
-use App\Models\Department;
-
-?>
 @extends('layouts.main')
 
 @section('nav-button')
@@ -48,6 +42,7 @@ use App\Models\Department;
                 </td>
                 <td>
                     <a href="{{route('books.show',$book->id)}}" class="btn btn-success">Show</a>
+                    @if(Auth::user())
                     <a href="{{route('books.edit',$book->id)}}" class="btn btn-primary">Edit</a>
                     <form action="{{route('books.destroy',$book->id)}}" method="post" style="display: inline;">
                         @csrf
@@ -55,6 +50,7 @@ use App\Models\Department;
 
                         <button class="btn btn-danger" type="submit" style="border: none;outline:none;">Delete</button>
                     </form>
+                        @endif
                 </td>
             </tr>
         @endforeach

@@ -20,8 +20,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::resource('books', BookController::class)->middleware('auth:web');
-Route::resource('authors', AuthorController::class)->middleware('auth:web');
-Route::resource('departments', DepartmentController::class)->middleware('auth:web');
+Route::resource('books', BookController::class);
+Route::resource('authors', AuthorController::class);
+Route::resource('departments', DepartmentController::class);
 Route::resource('userOperations', LoginopController::class);
 Route::post('userOperations',[LoginopController::class,'check'])->name('userOperations.check');

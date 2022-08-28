@@ -30,6 +30,7 @@
 
                 <td>
                     <a href="" class="btn btn-success">Show</a>
+                    @if(Auth::user())
                     <a href="" class="btn btn-primary">Edit</a>
                     <form action="{{route('departments.destroy',$department->id)}}" method="post" style="display: inline;">
                         @csrf
@@ -38,7 +39,7 @@
                         <button class="btn btn-danger"
                                 type="submit" style="border: none;outline:none;">Delete</button>
                     </form>
-
+@endif
                 </td>
             </tr>
         @endforeach
