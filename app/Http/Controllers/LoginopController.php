@@ -17,9 +17,10 @@ class LoginopController extends Controller
      */
     public function index()
     {
-        if(Auth::check()){
+        if (Auth::check()) {
             Auth::logout();
         }
+
         return view('userOperations.login');
     }
 
@@ -60,19 +61,43 @@ class LoginopController extends Controller
      */
     public function edit()
     {
-        //
+        return view('userOperations.edit');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Department $department
-     * @return \Illuminate\Http\Response
-     */
+    public function editPass()
+    {
+        return view('userOperations.editPass');
+    }
+
     public function update(Request $request)
     {
-        //
+        $request->user()->update($request->all());
+
+        return redirect()
+            ->route('welcome')
+            ->with('success', 'User Info Edited SUCCESSFULLY');
+    }
+
+    public function updatePass(Request $request)
+    {
+
+        if (Hash::check($request->old_pass, $request->user()->password)) {
+            if ($request->new_pass === $request->confirm_pass) {
+
+                $request->user()->update([
+                    'password' => Hash::make($request->new_pass)
+                ]);
+            }
+            return redirect()
+                ->route('welcome')
+                ->with('changed', 'Password Changed SUCCESSFULLY');
+        }
+
+        return redirect()
+            ->route('userOperations.updatePass', $request->user()->id)
+            ->with('error', 'Old Password is NOT correct!');
+
+
     }
 
     /**
@@ -94,17 +119,6 @@ class LoginopController extends Controller
             'password' => 'required|alphaNum|min:3',
         ]);
 
-        // $user = User::where('email','=',$request->user_email)->first();
-
-        // if ($user) {
-        //     $hashedPassword = $user->password;
-        //     if (Hash::check($request->user_pass , $hashedPassword)) {
-        //         return 'ok';
-        //     }
-        // }else{
-        //     return redirect()->route('userOperations.index');
-        // }
-
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             return redirect('/');
@@ -113,8 +127,10 @@ class LoginopController extends Controller
         }
     }
 
-    public function logout(){
+    public function logout()
+    {
         Auth::logout();
         return redirect()->route('userOperations.index');
     }
+
 }

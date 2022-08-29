@@ -19,9 +19,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 Route::resource('books', BookController::class);
 Route::resource('authors', AuthorController::class);
 Route::resource('departments', DepartmentController::class);
 Route::resource('userOperations', LoginopController::class);
 Route::post('userOperations',[LoginopController::class,'check'])->name('userOperations.check');
+Route::get('userOperations/edit/{id}',[LoginopController::class,'editPass'])->name('userOperations.editPass');
+Route::put('userOperations/edit/{id}',[LoginopController::class,'updatePass'])->name('userOperations.updatePass');

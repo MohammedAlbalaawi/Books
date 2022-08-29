@@ -14,5 +14,28 @@
 @endsection
 
 @section('page-title')
-    <h3>Website</h3>
+    <div class="row">
+            <div class="col-6 mx-auto">
+                @if(session('success'))
+                    <div class="alert alert-success" role="alert">{{session('success')}} </div>
+                @endif
+            </div>
+
+    </div>
+    <div class="row">
+        <div class="col">
+            Welcome : {{Auth::user()->name}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col ">
+            Email : {{Auth::user()->email}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <a class="btn btn-dark mx-2 my-3" href="{{route('userOperations.edit',Auth::id())}}">Edit Information</a>
+            <a class="btn btn-dark mx-2" href="{{route('userOperations.editPass',Auth::id())}}">Edit Password</a>
+        </div>
+    </div>
 @endsection
