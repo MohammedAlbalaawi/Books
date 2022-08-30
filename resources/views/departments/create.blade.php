@@ -53,8 +53,6 @@
                     url: "{{route('departments.store')}}",
                     type:'POST',
                     data: {_token:_token,name:name},
-                    //dataType: 'json',
-                     //contentType: false,
 
                     success: function(response) {
                         if(response) {
@@ -62,31 +60,14 @@
                         }
                     }, 
                     error: function(reject) {
-                     
-                            var errors = $.parseJSON(reject.responseText);
-
-                            $.each(errors.errors, function (key, val) {
-                               
+                        var errors = $.parseJSON(reject.responseText); // get array of all errors
+                        
+                        $.each(errors.errors, function (key, val) {
                         $("#" + key + "_error").text(val[0]);
-
                     });
                     }
-                    
                 });
-
-            }); 
-
-
-            function printErrorMsg (msg) {
-
-                $.each( msg, function( key, value ) {
-                    console.log(key);
-                    $('.'+key+'_err').text(value);
-
-                });
-
-            }
-
+            });
         });
 
     </script>

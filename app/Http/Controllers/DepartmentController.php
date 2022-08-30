@@ -44,9 +44,6 @@ class DepartmentController extends Controller
     {
         Department::create($request->all());
 
-        //  session()->flash('success', 'Author successfully created!');
-
-        return response()->json(['success' => 'Added successfully'],200);
-        //return new JsonResponse(['data'=>'Added successfully'],200);
+        return response()->json(['success' => 'Added successfully'], 200);
     }
 }
