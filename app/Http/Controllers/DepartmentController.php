@@ -8,8 +8,9 @@ use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
 {
-    public function __construct(){
-        $this->middleware('auth:web')->only(['create','store','edit','update','destroy']);
+    public function __construct()
+    {
+        $this->middleware('auth:web')->only(['create', 'store', 'edit', 'update', 'destroy']);
     }
     /**
      * Display a listing of the resource.
@@ -20,7 +21,7 @@ class DepartmentController extends Controller
     {
         $departments = Department::all();
         $flashMsg = session('success');
-        return view('departments.index',compact('departments','flashMsg'));
+        return view('departments.index', compact('departments', 'flashMsg'));
     }
 
     /**
@@ -43,53 +44,8 @@ class DepartmentController extends Controller
     {
         Department::create($request->all());
 
-        return redirect()
-            ->route('departments.index')
-            ->with('success','Department Added SUCCESSFULLY');
-    }
+        //  session()->flash('success', 'Author successfully created!');
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Department  $department
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Department $department)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Department  $department
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Department $department)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Department  $department
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Department $department)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Department  $department
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Department $department)
-    {
-        //
+        return response()->json(['success' => 'Added successfully']);
     }
 }

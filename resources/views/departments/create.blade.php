@@ -23,15 +23,66 @@
         @endif
     </div>
 
-    <form action="{{route('departments.store')}}" method="post">
+    <form>
         @csrf
         <div class="col-6 mx-auto">
+            <span class="text-success" id="nameSc"></span>
             <div class="mb-3">
-                <input type="text" class="form-control" name="name" placeholder="Enter Name">
+                <input type="text" class="form-control" name="name" id="name" placeholder="Enter Name">
+                <span class="text-danger" id="nameError"></span>
             </div>
             <div class="mb-3">
-                <Button type="submit" class="form-control btn btn-primary" name="submit">SUBMIT</Button>
+                <Button type="submit" class="form-control btn btn-primary" id="btn-submit" name="submit">SUBMIT</Button>
             </div>
         </div>
     </form>
+
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+
+            $("#btn-submit").click(function(e){
+
+                e.preventDefault();
+
+                let _token = $("input[name='_token']").val();
+                let name = $("input[name=name]").val();
+
+                $.ajax({
+
+                    url: "{{route('departments.store')}}",
+                    type:'POST',
+                    data: {_token:_token,name:name},
+                    //dataType: 'json',
+                     //contentType: false,
+
+                    success: function(response) {
+                        if(response) {
+                            $('#nameSc').text(response.success);
+                        }
+                    }, 
+                    error: function(error) {
+                        console.log(error.json);
+                        //$('#nameError').text(error.responseJSON.errors.name);
+                    }
+                    
+                });
+
+            }); 
+
+
+            function printErrorMsg (msg) {
+
+                $.each( msg, function( key, value ) {
+                    console.log(key);
+                    $('.'+key+'_err').text(value);
+
+                });
+
+            }
+
+        });
+
+    </script>
+
 @endsection

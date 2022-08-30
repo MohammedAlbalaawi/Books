@@ -82,7 +82,7 @@ class LoginopController extends Controller
     {
 
         if (Hash::check($request->old_pass, $request->user()->password)) {
-            if ($request->new_pass === $request->confirm_pass) {
+            if ($request->new_pass === $request->input('confirm_pass')) {
 
                 $request->user()->update([
                     'password' => Hash::make($request->new_pass)
