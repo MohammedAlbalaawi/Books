@@ -12,8 +12,8 @@
 
 @section('content')
     <div class="col-6 mx-auto">
-        @if($flashMsg)
-            <div class="alert alert-success" role="alert">{{$flashMsg}} </div>
+        @if(session('success'))
+            <div class="alert alert-success" role="alert">{{session('success')}} </div>
         @endif
     </div>
     <table class="table  table-hover w-75 mx-auto text-center">

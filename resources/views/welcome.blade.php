@@ -14,6 +14,7 @@
 @endsection
 
 @section('page-title')
+    @if(Auth::check())
     <div class="row">
             <div class="col-6 mx-auto">
                 @if(session('success'))
@@ -38,4 +39,5 @@
             <a class="btn btn-dark mx-2" href="{{route('userOperations.editPass',Auth::id())}}">Edit Password</a>
         </div>
     </div>
+    @endif
 @endsection

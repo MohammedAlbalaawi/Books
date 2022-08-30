@@ -44,9 +44,8 @@ class AuthorController extends Controller
     {
         Author::create($request->all());
 
-        return redirect()
-            ->route('authors.index')
-            ->with('success','Author Added SUCCESSFULLY');
+        session()->flash('success', 'Author successfully created!');
+        return response()->json(['success' => true]);
     }
 
     /**
