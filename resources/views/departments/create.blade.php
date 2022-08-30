@@ -29,7 +29,7 @@
             <span class="text-success" id="nameSc"></span>
             <div class="mb-3">
                 <input type="text" class="form-control" name="name" id="name" placeholder="Enter Name">
-                <span class="text-danger" id="nameError"></span>
+                <span class="text-danger" id="name_error"></span>
             </div>
             <div class="mb-3">
                 <Button type="submit" class="form-control btn btn-primary" id="btn-submit" name="submit">SUBMIT</Button>
@@ -61,9 +61,15 @@
                             $('#nameSc').text(response.success);
                         }
                     }, 
-                    error: function(error) {
-                        console.log(error.json);
-                        //$('#nameError').text(error.responseJSON.errors.name);
+                    error: function(reject) {
+                     
+                            var errors = $.parseJSON(reject.responseText);
+
+                            $.each(errors.errors, function (key, val) {
+                               
+                        $("#" + key + "_error").text(val[0]);
+
+                    });
                     }
                     
                 });
