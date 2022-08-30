@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 
 class AuthorController extends Controller
 {
-    public function __construct(){
+    public function __construct()
+    {
         $this->middleware('auth:web')->only(['create','store','edit','update','destroy']);
     }
     /**
@@ -18,10 +19,9 @@ class AuthorController extends Controller
      */
     public function index()
     {
-
         $authors = Author::all();
         $flashMsg = session('success');
-        return view('authors.index',compact('authors','flashMsg'));
+        return view('authors.index', compact('authors', 'flashMsg'));
     }
 
     /**
@@ -57,7 +57,7 @@ class AuthorController extends Controller
     public function show($id)
     {
         $author = Author::findorfail($id);
-        return view('authors.show',compact('author'));
+        return view('authors.show', compact('author'));
     }
 
     /**
@@ -69,7 +69,7 @@ class AuthorController extends Controller
     public function edit($id)
     {
         $author = Author::findorfail($id);
-        return view('authors.edit',compact('author'));
+        return view('authors.edit', compact('author'));
     }
 
     /**
@@ -86,7 +86,7 @@ class AuthorController extends Controller
 
         return redirect()
             ->route('authors.index')
-            ->with('success','Author Edited SUCCESSFULLY');
+            ->with('success', 'Author Edited SUCCESSFULLY');
     }
 
     /**
@@ -101,6 +101,6 @@ class AuthorController extends Controller
 
         return redirect()
             ->route('authors.index')
-            ->with('success','Author and His Books Deleted SUCCESSFULLY');
+            ->with('success', 'Author and His Books Deleted SUCCESSFULLY');
     }
 }

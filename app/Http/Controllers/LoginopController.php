@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -80,10 +79,8 @@ class LoginopController extends Controller
 
     public function updatePass(Request $request)
     {
-
         if (Hash::check($request->old_pass, $request->user()->password)) {
             if ($request->new_pass === $request->input('confirm_pass')) {
-
                 $request->user()->update([
                     'password' => Hash::make($request->new_pass)
                 ]);
@@ -96,8 +93,6 @@ class LoginopController extends Controller
         return redirect()
             ->route('userOperations.updatePass', $request->user()->id)
             ->with('error', 'Old Password is NOT correct!');
-
-
     }
 
     /**
@@ -113,7 +108,6 @@ class LoginopController extends Controller
 
     public function check(Request $request)
     {
-
         $validated = $request->validate([
             'email' => 'required|email',
             'password' => 'required|alphaNum|min:3',
@@ -132,5 +126,4 @@ class LoginopController extends Controller
         Auth::logout();
         return redirect()->route('userOperations.index');
     }
-
 }

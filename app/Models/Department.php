@@ -14,7 +14,8 @@ class Department extends Model
         'name'
     ];
 
-    public function bookdetails(){
+    public function bookdetails()
+    {
         return $this->hasMany(BookDetail::class);
     }
 }
