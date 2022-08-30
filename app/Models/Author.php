@@ -16,7 +16,8 @@ class Author extends Model
         'email'
     ];
 
-    public function books(){
+    public function books()
+    {
         return $this->hasMany(Book::class);
     }
 }
