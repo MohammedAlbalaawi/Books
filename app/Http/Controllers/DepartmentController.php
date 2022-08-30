@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
 {
-    public function __construct(){
+    public function __construct()
+    {
         $this->middleware('auth:web')->only(['create','store','edit','update','destroy']);
     }
     /**
@@ -20,7 +21,7 @@ class DepartmentController extends Controller
     {
         $departments = Department::all();
         $flashMsg = session('success');
-        return view('departments.index',compact('departments','flashMsg'));
+        return view('departments.index', compact('departments', 'flashMsg'));
     }
 
     /**
@@ -45,7 +46,7 @@ class DepartmentController extends Controller
 
         return redirect()
             ->route('departments.index')
-            ->with('success','Department Added SUCCESSFULLY');
+            ->with('success', 'Department Added SUCCESSFULLY');
     }
 
     /**
