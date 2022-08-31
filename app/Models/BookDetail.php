@@ -18,10 +18,12 @@ class BookDetail extends Model
         'image',
     ];
 
-    public function book(){
+    public function book()
+    {
         return $this->belongsTo(Book::class);
     }
-    public function department(){
+    public function department()
+    {
         return $this->belongsTo(Department::class);
     }
 }

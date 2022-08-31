@@ -37,7 +37,7 @@ class BooksController extends Controller
         $data = $request->validated();
 
         if ($request->file('image')) {
-            $data['image'] = $request->file('image')->store('books','publicImages');
+            $data['image'] = $request->file('image')->store('books', 'publicImages');
         }
 
         $book = Book::create(Arr::only($data, ['title', 'author_id']));
@@ -77,7 +77,7 @@ class BooksController extends Controller
         $data = $request->validated();
 
         if ($request->file('image')) {
-            $data['image'] = $request->file('image')->store('books','publicImages');
+            $data['image'] = $request->file('image')->store('books', 'publicImages');
         }
 
         $book->update(Arr::only($data, ['title', 'author_id']));
