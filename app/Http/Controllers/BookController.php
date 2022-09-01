@@ -12,9 +12,8 @@ use Nette\Utils\Image;
 
 class BookController extends Controller
 {
-
-
-    public function __construct(){
+    public function __construct()
+    {
         $this->middleware('auth:web')->only(['create','store','edit','update','destroy']);
     }
     /**
@@ -56,7 +55,6 @@ class BookController extends Controller
      */
     public function store(StoreBookRequest $request)
     {
-
         $author = Author::all()->where('name', '=', $request->authorName)->first();
         $department = Department::all()->where('name', '=', $request->departmentName)->first();
 
@@ -117,7 +115,6 @@ class BookController extends Controller
      */
     public function update(StoreBookEdittRequest $request, Book $book)
     {
-
         $author = Author::where('name', '=', $request->authorName)->first();
         $department = Department::where('name', '=', $request->departmentName)->first();
 
