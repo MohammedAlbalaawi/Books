@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthTokensController extends Controller
 {
-
     public function store(Request $request)
     {
         $request->validate([
@@ -27,11 +26,12 @@ class AuthTokensController extends Controller
             return response()->json([
                 'token' => $token->plainTextToken,
                 'user' => $user,
-            ],201);
+            ], 201);
         }
-        return response()->json([
-            'message' => 'Invalid Credentials'],401
+        return response()->json(
+            [
+            'message' => 'Invalid Credentials'],
+            401
         );
     }
 }
-
