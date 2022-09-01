@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AuthTokensController;
 use App\Http\Controllers\Api\BooksController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -19,3 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::apiResource('books',BooksController::class);
+Route::post('auth/tokens',[AuthTokensController::class,'store']);
