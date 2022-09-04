@@ -24,15 +24,16 @@ class StoreBookRequest extends FormRequest
      */
     public function rules()
     {
+
         if ($this->isMethod('post')) {
             return [
                 // book information
                 'title' => ['required', 'max:255'],
-                'author_id' => ['required', 'integer', Rule::exists('authors', 'id')],
+                'authorName' => ['required'],
                 // book details information
                 'year' => ['required'],
-                'image' => ['required', 'file', 'image', 'mimes:jpg,bmp,png'],
-                'department_id' => ['required', 'integer', Rule::exists('departments', 'id')],
+                'bookImage' => ['required', 'file', 'image', 'mimes:jpg,bmp,png'],
+                'departmentName' => ['required'],
                 'language' => ['required'],
             ];
         }
@@ -40,10 +41,11 @@ class StoreBookRequest extends FormRequest
             return [
                 // book information
                 'title' => ['required', 'max:255'],
-                'author_id' => ['required', 'integer', Rule::exists('authors', 'id')],
+                'authorName' => ['required'],
+                //'author_id' => ['required', 'integer', Rule::exists('authors', 'id')],
                 // book details information
                 'year' => ['required'],
-                'department_id' => ['required', 'integer', Rule::exists('departments', 'id')],
+                'departmentName' => ['required'],
                 'language' => ['required'],
             ];
         }

@@ -15,9 +15,9 @@
         @csrf
         @method('put')
         <div class="col-6 mx-auto">
-            <div class="mb-3">
-                <input type="text" class="form-control" name="name" value="{{$author->name}}">
-            </div>
+
+            @include('layouts.translatable',['field' => 'name','fieldValue' => $author->getTranslations('name')])
+
             <div class="mb-3">
                 <input type="text" class="form-control" name="country" value="{{$author->country}}">
             </div>

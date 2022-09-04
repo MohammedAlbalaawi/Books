@@ -22,6 +22,7 @@ class AuthTokensController extends Controller
         $user = User::where('email', $request->email)->first();
 
         if ($user && Hash::check($request->password, $user->password)) {
+
             $token = $user->createToken($request->device_name);
 
             return response()->json([

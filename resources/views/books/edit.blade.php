@@ -19,15 +19,8 @@
             @csrf
             @method('put')
             <div class="col-6 mx-auto">
-                <div class="mb-3">
-                    <input type="text"
-                           class="form-control @error('title') is-invalid @enderror"
-                           name="title"
-                           value="{{$book->title}}">
-                    @error('title')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
-                </div>
+
+                @include('layouts.translatable',['field' => 'title','fieldValue' => $book->getTranslations('title')])
                 <div class="mb-3 row">
                     <div class="col-auto">
                         <label class="col-form-label">Author</label>

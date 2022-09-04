@@ -26,9 +26,9 @@
     <form action="{{route('authors.store')}}" method="post" id="authorForm">
         @csrf
         <div class="col-6 mx-auto">
-            <div class="mb-3">
-                <input type="text" class="form-control" name="name" id="name" placeholder="Enter Name">
-            </div>
+
+            @include('layouts.translatable',['field' => 'name'])
+
             <div class="mb-3">
                 <input type="text" class="form-control" name="country" id="country" placeholder="Enter Country">
             </div>
@@ -46,13 +46,18 @@
                 e.preventDefault();
 
                 axios.post(this.action, {
-                        'name': document.querySelector('#name').value,
+                        'name': {
+                            'en':document.querySelector('#name-en').value,
+                            'ar':document.querySelector('#name-ar').value,
+                        },
+                        // 'name[en]': document.querySelector('#name-en').value,
+                        // 'name[ar]': document.querySelector('#name-ar').value,
                         'country': document.querySelector('#country').value,
                         'email': document.querySelector('#email').value,
                 })
                 .then((responce) =>{
                     window.location.href = '{{ route('authors.index') }}'
-                    
+
                 })
                 .catch((error) =>{
                     const errors = error.response.data.errors // get all errors
@@ -60,7 +65,7 @@
                     const firstItemDOM = document.getElementById(firstItem) // get the item
                     const firstErrorMessage = errors[firstItem][0] // get the error message of the item
 
-                    
+
                     // scroll to the error message
                     firstItemDOM.scrollIntoView()
 
@@ -68,7 +73,7 @@
 
                     // show the error message
                     firstItemDOM.insertAdjacentHTML('afterend', `<div class="text-danger">${firstErrorMessage}</div>`)
-                    
+
                     // highlight the form control with the error
                     firstItemDOM.classList.add('border', 'border-danger')
                 });
@@ -78,7 +83,7 @@
                 // remove all error messages
                 const errorMessages = document.querySelectorAll('.text-danger')
                 errorMessages.forEach((element) => element.textContent = '')
-                
+
                 // remove all form controls with highlighted error text box
                 const formControls = document.querySelectorAll('.form-control')
                 formControls.forEach((element) => element.classList.remove('border', 'border-danger'))

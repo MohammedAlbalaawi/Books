@@ -55,6 +55,7 @@ class BookController extends Controller
      */
     public function store(StoreBookRequest $request)
     {
+
         $author = Author::all()->where('name', '=', $request->authorName)->first();
         $department = Department::all()->where('name', '=', $request->departmentName)->first();
 
@@ -115,8 +116,10 @@ class BookController extends Controller
      */
     public function update(StoreBookEdittRequest $request, Book $book)
     {
-        $author = Author::where('name', '=', $request->authorName)->first();
-        $department = Department::where('name', '=', $request->departmentName)->first();
+
+        $author = Author::where('name->en', '=', $request->authorName)->first();
+
+        $department = Department::where('name->en', '=', $request->departmentName)->first();
 
 
         $book->update([

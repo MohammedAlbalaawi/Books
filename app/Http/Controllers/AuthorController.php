@@ -10,8 +10,10 @@ class AuthorController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:web')->only(['create','store','edit','update','destroy']);
+        $this->middleware('auth:web')->only(['create', 'store', 'edit', 'update', 'destroy']);
+
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -19,6 +21,8 @@ class AuthorController extends Controller
      */
     public function index()
     {
+      //  app()->setLocale('ar');
+
         $authors = Author::all();
         $flashMsg = session('success');
         return view('authors.index', compact('authors', 'flashMsg'));
@@ -37,11 +41,12 @@ class AuthorController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreAuthorRequest $request)
     {
+
         Author::create($request->all());
 
         session()->flash('success', 'Author successfully created!');
@@ -51,7 +56,7 @@ class AuthorController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Author  $author
+     * @param \App\Models\Author $author
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -63,7 +68,7 @@ class AuthorController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Author  $author
+     * @param \App\Models\Author $author
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -75,8 +80,8 @@ class AuthorController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Author  $author
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Author $author
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -92,7 +97,7 @@ class AuthorController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Author  $author
+     * @param \App\Models\Author $author
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

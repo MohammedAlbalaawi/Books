@@ -14,11 +14,8 @@
         @csrf
         <div class="col-6 mx-auto">
             <div class="mb-3">
-                <input type="text"
-                       class="form-control @error('title') is-invalid @enderror"
-                       name="title"
-                       value="{{old('title')}}"
-                       placeholder="Enter title">
+
+                @include('layouts.translatable',['field' => 'title'])
                 @error('title')
                 <div class="alert alert-danger">{{ $message }}</div>
                 @enderror

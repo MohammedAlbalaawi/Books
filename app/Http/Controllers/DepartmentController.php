@@ -42,8 +42,12 @@ class DepartmentController extends Controller
      */
     public function store(StoreDepartmentRequest $request)
     {
-        Department::create($request->all());
 
-        return response()->json(['success' => 'Added successfully'], 200);
+        Department::create($request->all());
+        return redirect()
+            ->route('departments.index')
+            ->with('success', 'Department Added SUCCESSFULLY');
+
+        //return response()->json(['success' => 'Added successfully'], 200);
     }
 }
