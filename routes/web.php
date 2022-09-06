@@ -24,7 +24,7 @@ Route::get('/', function () {
 Route::resource('books', BookController::class);
 
 Route::resource('authors', AuthorController::class)
-->parameters(['authors' => 'model']);
+    ->parameters(['authors' => 'model']);
 
 Route::resource('users', UserController::class)
     ->parameters(['users' => 'model']);

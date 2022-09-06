@@ -2,11 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Author;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(User::class ,'model');
+
+        $this->middleware('auth:web')->only(['create','store','edit','update','destroy']);
+    }
+
     /**
      * Display a listing of the resource.
      *
