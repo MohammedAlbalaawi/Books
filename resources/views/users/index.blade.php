@@ -3,7 +3,7 @@
 @section('nav-button')
     <div class="container d-flex justify-content-start ">
         <a class="btn btn-light mx-2" href="/">Back to Main</a>
-        <a class="btn btn-light" href="{{route('departments.create')}}">Add New User</a>
+        <a class="btn btn-light" href="{{route('users.create')}}">Add New User</a>
     </div>
 @endsection
 @section('page-title')

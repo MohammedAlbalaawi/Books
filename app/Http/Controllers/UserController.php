@@ -34,7 +34,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('users.create');
     }
 
     /**
@@ -43,9 +43,13 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,User $model)
     {
-        //
+        $model->create($request->all());
+
+        return redirect()
+            ->route('users.index')
+            ->with('success', 'User Created SUCCESSFULLY');
     }
 
     /**

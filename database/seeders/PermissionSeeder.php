@@ -25,6 +25,7 @@ class PermissionSeeder extends Seeder
             'dashboard' => ['viewAny'],
             'authors' => ['viewAny', 'view', 'create', 'update', 'delete'],
             'books' => ['viewAny', 'view', 'create', 'update', 'delete'],
+            'users' => ['viewAny', 'view', 'create', 'update', 'delete'],
         ];
 
         foreach ($allPermissions as $group => $permissions) {
