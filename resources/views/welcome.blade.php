@@ -2,6 +2,8 @@
 
 @section('nav-button')
     <div class="container d-flex justify-content-start ">
+{{--        <a class="btn btn-light mx-2" href="{{route('roles.index')}}">Roles</a>--}}
+        <a class="btn btn-light mx-2" href="{{route('users.index')}}">Users</a>
         <a class="btn btn-light mx-2" href="{{route('books.index')}}">Books</a>
         <a class="btn btn-light" href="{{route('authors.index')}}">Authors</a>
         <a class="btn btn-light mx-2" href="{{route('departments.index')}}">Departments</a>

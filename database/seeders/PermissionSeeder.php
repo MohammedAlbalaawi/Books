@@ -43,6 +43,8 @@ class PermissionSeeder extends Seeder
         ]);
         $role->givePermissionTo(Permission::all());
 
+//        $role2->givePermissionTo(Permission::where('name', '=', 'create book')->first());
+
         // Create User
         $user = User::firstOrCreate([
             'name' => 'admin',
@@ -51,6 +53,7 @@ class PermissionSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
             ]);
+
 
         $user->assignRole($role);
 

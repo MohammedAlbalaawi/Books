@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\LoginopController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +25,9 @@ Route::resource('books', BookController::class);
 
 Route::resource('authors', AuthorController::class)
 ->parameters(['authors' => 'model']);
+
+Route::resource('users', UserController::class)
+    ->parameters(['users' => 'model']);
 
 Route::resource('departments', DepartmentController::class);
 Route::resource('userOperations', LoginopController::class);
