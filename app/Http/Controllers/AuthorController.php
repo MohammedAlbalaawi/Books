@@ -10,6 +10,8 @@ class AuthorController extends Controller
 {
     public function __construct()
     {
+        $this->authorizeResource(Author::class ,'model');
+
         $this->middleware('auth:web')->only(['create','store','edit','update','destroy']);
     }
     /**
@@ -19,6 +21,7 @@ class AuthorController extends Controller
      */
     public function index()
     {
+
         $authors = Author::all();
         $flashMsg = session('success');
         return view('authors.index', compact('authors', 'flashMsg'));
@@ -49,40 +52,34 @@ class AuthorController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Author  $author
-     * @return \Illuminate\Http\Response
+     * @param Author $model
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function show($id)
+    public function show(Author $model)
     {
-        $author = Author::findorfail($id);
+        $author = $model;
         return view('authors.show', compact('author'));
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Author  $author
-     * @return \Illuminate\Http\Response
+     * @param Author $model
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function edit($id)
+    public function edit(Author $model)
     {
-        $author = Author::findorfail($id);
+        $author = $model;
+
         return view('authors.edit', compact('author'));
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Author  $author
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Author $model
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Author $model)
     {
-        $author = Author::findorfail($id);
-        $author->update($request->all());
+        $model->update($request->all());
 
         return redirect()
             ->route('authors.index')
@@ -90,14 +87,12 @@ class AuthorController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Author  $author
-     * @return \Illuminate\Http\Response
+     * @param Author $model
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(Author $model)
     {
-        Author::destroy($id);
+        $model->delete();
 
         return redirect()
             ->route('authors.index')

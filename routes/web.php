@@ -21,7 +21,10 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 Route::resource('books', BookController::class);
-Route::resource('authors', AuthorController::class);
+
+Route::resource('authors', AuthorController::class)
+->parameters(['authors' => 'model']);
+
 Route::resource('departments', DepartmentController::class);
 Route::resource('userOperations', LoginopController::class);
 Route::post('userOperations', [LoginopController::class,'check'])->name('userOperations.check');
