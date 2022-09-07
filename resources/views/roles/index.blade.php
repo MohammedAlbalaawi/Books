@@ -3,7 +3,7 @@
 @section('nav-button')
     <div class="container d-flex justify-content-start ">
         <a class="btn btn-light mx-2" href="/">Back to Main</a>
-        <a class="btn btn-light" href="{{route('departments.create')}}">Add New Role</a>
+        <a class="btn btn-light" href="{{route('roles.create')}}">Add New Role</a>
     </div>
 @endsection
 @section('page-title')
@@ -24,15 +24,15 @@
         </tr>
         </thead>
         <tbody>
-        @foreach ($departments as $department)
+        @foreach ($roles as $role)
             <tr style="height: auto;vertical-align: middle;">
-                <td>{{$department->name}}</td>
+                <td>{{$role->name}}</td>
 
                 <td>
                     <a href="" class="btn btn-success">Show</a>
                     @if(Auth::user())
                     <a href="" class="btn btn-primary">Edit</a>
-                    <form action="{{route('departments.destroy',$department->id)}}" method="post" style="display: inline;">
+                    <form action="" method="post" style="display: inline;">
                         @csrf
                         @method('delete')
 
