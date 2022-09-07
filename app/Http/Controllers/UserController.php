@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Author;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
@@ -47,7 +49,14 @@ class UserController extends Controller
      */
     public function store(Request $request,User $model)
     {
-        $user =$model->create($request->all());
+        $user =$model->create(
+            array_merge(
+                $request->all(),
+                ['password' => Hash::make($request->input('password'))]
+            )
+        );
+
+
         $user->assignRole($request->input('roles'));
 
 
